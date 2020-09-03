@@ -24,7 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser;
+      final user = await _auth.currentUser; //TODO descubrir que le pasa que no me deja usar el login, me devuelve null
       if (user != null) {
         loggedInUser = user;
         print(loggedInUser.email);
