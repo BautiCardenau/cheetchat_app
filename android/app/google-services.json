@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "505033870800",
+    "firebase_url": "https://cheet-chat.firebaseio.com",
+    "project_id": "cheet-chat",
+    "storage_bucket": "cheet-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505033870800:android:bcda108b32e73fd7fd3dd5",
+        "android_client_info": {
+          "package_name": "bauticardenau.cheetchatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505033870800-n91dngt59om1dsnpv7kque42l4tlbos7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9PacjU8eja3W9AhTTONG22DsAMlE7o1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505033870800-n91dngt59om1dsnpv7kque42l4tlbos7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
