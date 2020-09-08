@@ -1,5 +1,6 @@
 import 'package:cheetchatapp/components/RoundedButton.dart';
 import 'package:cheetchatapp/constants.dart';
+import 'package:cheetchatapp/screens/chat_list_screen.dart';
 import 'package:cheetchatapp/screens/chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     final user = await _auth.signInWithEmailAndPassword(
                         email: email.trim(), password: password);
                     if (user != null) {
-                      Navigator.pushNamed(context, ChatScreen.id);
+                      Navigator.pushNamed(context, ChatListScreen.id);
                     }
 
                     setState(() {

@@ -1,3 +1,4 @@
+import 'package:cheetchatapp/screens/chat_list_screen.dart';
 import 'package:cheetchatapp/screens/chat_screen.dart';
 import 'package:cheetchatapp/screens/login_screen.dart';
 import 'package:cheetchatapp/screens/registration_screen.dart';
@@ -22,6 +23,7 @@ class CheetChat extends StatelessWidget {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         RegistrationScreen.id: (context) => RegistrationScreen(),
+        ChatListScreen.id: (context) => ChatListScreen(),
         ChatScreen.id: (context) => ChatScreen(),
       },
     );
