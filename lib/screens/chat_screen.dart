@@ -18,12 +18,14 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _auth = FirebaseAuth.instance;
   final messageTextEditController = TextEditingController();
+  String chatID;
   String messageText;
 
   @override
   void initState() {
     super.initState();
     getCurrentUser();
+    print(chatID);
   }
 
   void getCurrentUser() async {
@@ -31,7 +33,6 @@ class _ChatScreenState extends State<ChatScreen> {
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -40,6 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    chatID = ModalRoute.of(this.context).settings.arguments;
     return Scaffold(
       backgroundColor: kLightBrownColor,
       appBar: AppBar(
@@ -67,7 +69,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessagesStream(),
+            MessagesStream(chatID: chatID),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -92,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: FlatButton(
                       onPressed: () {
                         messageTextEditController.clear();
-                        _firestore.collection('messages').add({
+                        _firestore.collection('chats/$chatID/messages').add({
                           'text': messageText,
                           'sender': loggedInUser.email,
                           'date': DateTime.now()
@@ -115,11 +117,15 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 class MessagesStream extends StatelessWidget {
+  final String chatID;
+
+  MessagesStream({this.chatID});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore
-          .collection('messages')
+          .collection('chats/$chatID/messages')
           .orderBy('date', descending: false)
           .snapshots(),
       builder: (context, snapshot) {
@@ -128,7 +134,7 @@ class MessagesStream extends StatelessWidget {
             child: kProgressIndicator,
           );
         }
-        final messages = snapshot.data.docs.reversed;
+        final messages = snapshot.data.docs;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
           var messageText = message.get('text');

@@ -88,9 +88,10 @@ class ChatsStream extends StatelessWidget {
         final chats = snapshot.data.docs;
         List<ChatBubble> chatsList = [];
         for (var chat in chats) {
-          var lastText = chat.get('lastText');
           var chatUser = chat.get('user');
           var chatID = chat.id;
+          var lastText = chat.get('lastText');
+          //TODO: cambiar el last text de alguna forma
           var dateFormat = DateFormat('dd/MM/yyyy');
           var lastDate = dateFormat.format(
               new DateTime.fromMicrosecondsSinceEpoch(
@@ -104,17 +105,33 @@ class ChatsStream extends StatelessWidget {
             lastText: lastText,
             lastDate: lastDate,
             onPressed: () {
-              Navigator.pushNamed(context, ChatScreen.id);
+              Navigator.pushNamed(context, ChatScreen.id, arguments: chatID);
             },
           );
           chatsList.add(chatBubble);
         }
 
-        return Expanded(
-            child: ListView(
-          children: chatsList,
-          padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
-        ));
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Expanded(
+                child: ListView(
+              children: chatsList,
+              padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 5.0),
+            )),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: FloatingActionButton(
+                //TODO: agregar una nueva pantalla para iniciar chat
+                child: Icon(
+                  Icons.add,
+                  color: kExtraLightBrown,
+                ),
+                backgroundColor: kDarkBrownColor,
+              ),
+            ),
+          ],
+        );
       },
     );
   }
