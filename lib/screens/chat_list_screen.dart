@@ -1,5 +1,6 @@
 import 'package:cheetchatapp/components/MessageBubble.dart';
 import 'package:cheetchatapp/screens/chat_screen.dart';
+import 'package:cheetchatapp/screens/new_chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -123,6 +124,9 @@ class ChatsStream extends StatelessWidget {
               padding: const EdgeInsets.all(20.0),
               child: FloatingActionButton(
                 //TODO: agregar una nueva pantalla para iniciar chat
+                onPressed: () {
+                  Navigator.pushNamed(context, NewChatScreen.id);
+                },
                 child: Icon(
                   Icons.add,
                   color: kExtraLightBrown,
